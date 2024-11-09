@@ -18,7 +18,7 @@ layer_names = yolo_net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in yolo_net.getUnconnectedOutLayers()]
 
 # Load the input image
-image_path = "images/Management10500.jpg"  # Replace with your image path
+image_path = "images/raising_hand.jpg"  # Replace with your image path
 frame = cv2.imread(image_path)
 
 # Prepare the image for YOLO
@@ -39,7 +39,7 @@ for out in outs:
         scores = detection[5:]
         class_id = np.argmax(scores)
         confidence = scores[class_id]
-        
+
         # Detect only people
         if classes[class_id] == "person" and confidence > 0.5:
             # Get bounding box coordinates
@@ -47,11 +47,11 @@ for out in outs:
             center_y = int(detection[1] * height)
             w = int(detection[2] * width)
             h = int(detection[3] * height)
-            
+
             # Rectangle coordinates
             x = int(center_x - w / 2)
             y = int(center_y - h / 2)
-            
+
             boxes.append([x, y, w, h])
             confidences.append(float(confidence))
             class_ids.append(class_id)
@@ -66,13 +66,13 @@ for i in indices:
     x, y, w, h = boxes[i]
     label = str(classes[class_ids[i]])
     confidence = confidences[i]
-    
+
     # Draw a bounding box for each detected person
-    #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-    #cv2.putText(frame, f"{label} {confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    
+    # cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    # cv2.putText(frame, f"{label} {confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
     # Save each detected person as a separate image
-    person_image = frame[y:y+h, x:x+w]
+    person_image = frame[y : y + h, x : x + w]
     person_image_path = f"boxes/person_{box_count}.jpg"
     cv2.imwrite(person_image_path, person_image)
     print(f"Saved person image to {person_image_path}")
