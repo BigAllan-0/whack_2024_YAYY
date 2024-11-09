@@ -15,3 +15,14 @@ body {
   li {
     margin-bottom: 5px;
   }
+
+  .neutral {
+    color: black;
+  }
+  .distracting {
+    color: red;
+    font-weight: bold;
+  }
+  .non-distracting {
+    color: green;
+  }
