@@ -45,9 +45,9 @@
       });
 
       let updatedCategories = categories.map(value => {
-        if (value === 'Neutral') return 0;
-        if (value === 'Distracting') return 1;
-        if (value === 'Non-distracting') return -1;
+        if (value === 'Neutral') return 1;
+        if (value === 'Distracting') return 2;
+        if (value === 'Non-distracting') return 0;
         return value; // in case there are unexpected values
       });
       
