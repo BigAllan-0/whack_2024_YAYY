@@ -12,6 +12,8 @@
   document.addEventListener('DOMContentLoaded', function () {
     chrome.tabs.query({}, function (tabs) {
       const tabsList = document.getElementById('tabs-list');
+      let categorizedTabs = [];
+      let categories = [];
   
       tabs.forEach(tab => {
         // Categorize based on domain or keywords
@@ -25,12 +27,15 @@
           category = 'Distracting';
         }
 
-        // // Add categorized tab data to the array
-        // categorizedTabs.push({
-        //   title: tab.title,
-        //   url: tab.url,
-        //   category: category
-        // });
+        // Add categorized tab data to the array
+        categorizedTabs.push({
+          title: tab.title,
+          url: tab.url,
+          category: category
+        });
+
+        // Add the category value to the categories array
+        categories.push(category);
   
         // Create list item with category info
         const listItem = document.createElement('li');
@@ -39,19 +44,34 @@
         tabsList.appendChild(listItem);
       });
 
-      // // Send the categorized tabs data to the local server
-      // fetch('http://localhost:3000/receive-tabs', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(categorizedTabs)
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   console.log('Data successfully sent to server:', data);
-      // })
-      // .catch(error => console.error('Error sending data to server:', error));
+      let updatedCategories = categories.map(value => {
+        if (value === 'Neutral') return 0;
+        if (value === 'Distracting') return 1;
+        if (value === 'Non-distracting') return -1;
+        return value; // in case there are unexpected values
+      });
+      
+      console.log(updatedCategories);
+
+      // // Log the categories array to check the stored categories
+      // console.log('Categories:', categories);
+
+      // Send the categorized tabs data to the local server
+      fetch('http://localhost:3000/receive-tabs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          categorizedTabs: categorizedTabs,  // Send the full tab data
+          categories: categories             // Send the categories array
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Data successfully sent to server:', data);
+      })
+      .catch(error => console.error('Error sending data to server:', error));
     });
   });
   
