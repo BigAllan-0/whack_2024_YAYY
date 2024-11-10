@@ -64,7 +64,7 @@
         },
         body: JSON.stringify({
           categorizedTabs: categorizedTabs,  // Send the full tab data
-          categories: categories             // Send the categories array
+          categories: updatedCategories             // Send the categories array
         })
       })
       .then(response => response.json())
