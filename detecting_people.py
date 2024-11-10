@@ -1,8 +1,10 @@
 import cv2
 import numpy as np
-image_path = "images/raising_hand.jpg"  # Replace with your image path
 
-def get_people(image_path): 
+image_path = "captured_image.jpg"  # Replace with your image path
+
+
+def get_people(image_path):
     # Load YOLOv3 model and configuration files
     yolo_config_path = "yolov3.cfg"
     yolo_weights_path = "yolov3.weights"
@@ -24,7 +26,9 @@ def get_people(image_path):
 
     # Prepare the image for YOLO
     height, width, channels = frame.shape
-    blob = cv2.dnn.blobFromImage(frame, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
+    blob = cv2.dnn.blobFromImage(
+        frame, 0.00392, (416, 416), (0, 0, 0), True, crop=False
+    )
     yolo_net.setInput(blob)
 
     # Get detection results
@@ -75,13 +79,17 @@ def get_people(image_path):
         # Save each detected person as a separate image
         person_image = frame[y : y + h, x : x + w]
         person_image_path = f"boxes/person_{box_count}.jpg"
-        cv2.imwrite(person_image_path, person_image)
-        print(f"Saved person image to {person_image_path}")
+        try:
+            cv2.imwrite(person_image_path, person_image)
+        except:
+            pass
+        # print(f"Saved person image to {person_image_path}")
         box_count += 1
 
     # Save the output image
     output_image_path = "output_image.jpg"
     cv2.imwrite(output_image_path, frame)
     print(f"Output image saved to {output_image_path}")
+
 
 get_people(image_path)
