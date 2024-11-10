@@ -24,6 +24,13 @@
         } else if (url.hostname.includes('coolmathgames.com') || url.hostname.includes('games')) {
           category = 'Distracting';
         }
+
+        // // Add categorized tab data to the array
+        // categorizedTabs.push({
+        //   title: tab.title,
+        //   url: tab.url,
+        //   category: category
+        // });
   
         // Create list item with category info
         const listItem = document.createElement('li');
@@ -31,6 +38,20 @@
                               <span style="color: ${category === 'Distracting' ? 'red' : 'green'}">(${category})</span>`;
         tabsList.appendChild(listItem);
       });
+
+      // // Send the categorized tabs data to the local server
+      // fetch('http://localhost:3000/receive-tabs', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(categorizedTabs)
+      // })
+      // .then(response => response.json())
+      // .then(data => {
+      //   console.log('Data successfully sent to server:', data);
+      // })
+      // .catch(error => console.error('Error sending data to server:', error));
     });
   });
   
