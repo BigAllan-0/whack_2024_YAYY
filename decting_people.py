@@ -18,7 +18,7 @@ layer_names = yolo_net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in yolo_net.getUnconnectedOutLayers()]
 
 # Load the input image
-image_path = "images/raising_hand.jpg"  # Replace with your image path
+image_path = "images/lively_class.jpg"  # Replace with your image path
 frame = cv2.imread(image_path)
 
 # Prepare the image for YOLO
