@@ -6,6 +6,3 @@ TODO List:  https://docs.google.com/document/d/1Bnr-rEH4ARZDjBngTW9rFfdkXIc3z0TY
 
 
 CANVA: https://www.canva.com/design/DAGWFsW_kns/kdB_V-EQp9UNYDVpT8fY6g/edit?utm_content=DAGWFsW_kns&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-
-
-devpost writeup: https://docs.google.com/document/d/1hYqK3hd8G1Bg0oKaBRRPrlZRTMusgQ4r7bh21TWkXZ0/edit?usp=sharing 
